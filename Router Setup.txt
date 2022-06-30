@@ -1,0 +1,114 @@
+en
+conf t
+int fa0/0.10
+enc dot1Q 10
+ip add 172.16.3.49 255.255.255.252
+ip helper-address 172.16.3.50
+exit
+int fa0/0.20
+enc dot1Q 20
+ip add 172.16.0.254 255.255.255.240
+ip helper-address 172.16.3.50
+exit
+int fa0/0.30
+enc dot1Q 30
+ip add 172.16.0.222 255.255.255.224
+ip helper-address 172.16.3.50
+exit
+int fa0/0.40
+enc dot1Q 40
+ip add 172.16.1.78 255.255.255.240
+ip helper-address 172.16.3.50
+exit
+int fa0/0.50
+enc dot1Q 50
+ip add 172.16.1.94 255.255.255.240
+ip helper-address 172.16.3.50
+exit
+int fa0/0.60
+enc dot1Q 60
+ip add 172.16.1.110 255.255.255.240
+ip helper-address 172.16.3.50
+exit
+int fa0/0.70
+enc dot1Q 70
+ip add 172.16.1.126 255.255.255.240
+ip helper-address 172.16.3.50
+exit
+int fa0/0.80
+enc dot1Q 80
+ip add  172.16.1.142 255.255.255.240
+ip helper-address 172.16.3.50
+exit
+int fa0/0.90
+enc dot1Q 90
+ip add 172.16.1.158 255.255.255.240
+ip helper-address 172.16.3.50
+exit
+int fa0/0.100
+enc dot1Q 100
+ip add 172.16.0.126 255.255.255.128
+ip helper-address 172.16.3.50
+exit
+int fa0/0.110
+enc dot1Q 110
+ip add  172.16.3.46 255.255.255.248
+ip helper-address 172.16.3.50
+exit
+int fa0/0.120
+enc dot1Q 120
+ip add 172.16.0.190  255.255.255.192
+ip helper-address 172.16.3.50
+exit
+int fa0/0.130
+enc dot1Q 130
+ip add 172.16.1.30 255.255.255.224
+ip helper-address 172.16.3.50
+exit
+int fa0/0.140
+enc dot1Q 140
+ip add 172.16.1.62 255.255.255.240
+ip helper-address 172.16.3.50
+exit
+int fa0/0.150
+enc dot1Q 150
+ip add 172.16.1.46 255.255.255.240
+ip helper-address 172.16.3.50
+exit
+int fa0/0.160
+enc dot1Q 160
+ip add 172.16.3.38 255.255.255.248
+ip helper-address 172.16.3.50
+exit
+int f0/0
+no shut
+exit
+ip dhcp pool Admin
+default-router 172.18.0.225
+network 172.18.0.224 255.255.255.240
+exit
+ip dhcp pool Competitor-Machines
+default-router 172.18.0.241
+network 172.18.0.240 255.255.255.240
+exit
+int fa0/0
+no shut
+do wr
+
+en
+conf t
+hostname Leeds-R1
+banner motd #Unauthorized access prohibited!#
+no ip domain-lookup
+enable secret 5t@ff
+line con 0
+logging synchronous
+exec-timeout 10
+password cisco
+login
+line vty 0 15
+exec-timeout 10
+transport input telnet
+password 5t@ff
+login
+exit

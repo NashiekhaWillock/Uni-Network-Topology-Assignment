@@ -1,0 +1,167 @@
+en
+conf t
+hostname Leeds-Core-SW
+vlan 10
+name DHCP-Server
+vlan 20
+name Admin
+vlan 30
+name IP-Phones
+vlan 40
+name Competitor-Block-1
+vlan 50
+name Competitor-Block-2
+vlan 60
+name Competitor-Block-3
+vlan 70
+name Competitor-Block-4
+vlan 80
+name Competitor-Block-5
+vlan 90
+name Competitor-Block-6
+vlan 100
+name Fire-Precaution-Devices
+vlan 110
+name Networked-Laser-Printers
+vlan 120
+name Security-IP-Cameras
+vlan 130
+name Server-Class
+vlan 140
+name Management
+exit
+vlan 150
+name Finance
+exit
+vlan 160
+name Security
+exit
+int vlan 10
+ip add 172.16.3.49 255.255.255.252
+no shut
+exit
+int vlan 20
+ip add 172.16.0.225 255.255.255.240
+no shut
+exit
+int vlan 30
+ip add 172.16.0.193 255.255.255.224
+no shut
+exit
+int vlan 40
+ip add 172.16.1.65 255.255.255.240
+no shut
+exit
+int vlan 50
+ip add 172.16.1.81 255.255.255.240
+no shut
+exit
+int vlan 60
+ip add 172.16.1.97 255.255.255.240
+no shut
+exit
+int vlan 70
+ip add 172.16.1.113 255.255.255.240
+no shut
+exit
+int vlan 80
+ip add 172.16.1.129 255.255.255.240
+no shut
+exit
+int vlan 90
+ip add 172.16.1.145 255.255.255.240
+no shut
+exit
+int vlan 100
+ip add 172.16.0.1 255.255.255.128
+no shut
+exit
+int vlan 110
+ip add 172.16.3.41 255.255.255.248
+no shut
+exit
+int vlan 120
+ip add 172.16.0.129 255.255.255.192
+no shut
+exit
+int vlan 130
+ip add 172.16.1.1 255.255.255.224
+no shut
+exit
+int vlan 140
+ip add 172.16.1.49 255.255.255.240
+no shut
+exit
+int vlan 150
+ip add 172.16.1.33 255.255.255.240
+no shut
+exit
+int vlan 160
+ip add 172.16.3.33 255.255.255.248
+no shut
+exit
+vtp mode server
+vtp domain cisco.com
+vtp version 2
+int range f0/2-6
+switchport trunk enc dot1q
+switchport mode trunk
+exit
+int f0/1
+switchport mode access
+switchport access vlan 10
+int vlan 20
+ip helper-address 172.16.3.50
+int vlan 30
+ip helper-address 172.16.3.50
+int vlan 40
+ip helper-address 172.16.3.50
+int vlan 50
+ip helper-address 172.16.3.50
+int vlan 60
+ip helper-address 172.16.3.50
+int vlan 70
+ip helper-address 172.16.3.50
+int vlan 80
+ip helper-address 172.16.3.50
+int vlan 90
+ip helper-address 172.16.3.50
+int vlan 100
+ip helper-address 172.16.3.50
+int vlan 110
+ip helper-address 172.16.3.50
+int vlan 120
+ip helper-address 172.16.3.50
+exit
+int vlan 130
+ip helper-address 172.16.3.50
+exit
+int vlan 140
+ip helper-address 172.16.3.50
+exit
+int vlan 150
+ip helper-address 172.16.3.50
+exit
+int vlan 160
+ip helper-address 172.16.3.50
+exit
+ip routing
+exit
+
+en
+conf t
+hostname Manc-Core-S1
+banner motd #Unauthorized access prohibited!#
+no ip domain-lookup
+enable secret 5t@ff
+line con 0
+logging synchronous
+exec-timeout 10
+password cisco
+login
+line vty 0 15
+exec-timeout 10
+transport input telnet
+password 5t@ff
+login
+exit
